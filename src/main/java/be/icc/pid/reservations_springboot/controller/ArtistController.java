@@ -64,6 +64,9 @@ public class ArtistController {
             model.addAttribute("errorMessage", "Échec de la modification de l'artiste !");
             return "artist/edit";
         }
+		    service.updateArtist(id, artist);
+            redirAttrs.addFlashAttribute("successMessage", "Artiste modifié avec succès.");
+
 
         Artist existing = service.getArtist(id);
         if (existing == null) {
