@@ -13,3 +13,7 @@ public interface TypeRepository extends CrudRepository<Type, Long> {
 	Optional<Type> findById(long id);
 }
 
+
+public interface TypeRepository extends CrudRepository<Type, Long> {
+	Type findByType(String type);
+	Optional<Type> findById(long id);
