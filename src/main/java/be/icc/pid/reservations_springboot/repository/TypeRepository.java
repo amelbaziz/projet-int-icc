@@ -14,6 +14,3 @@ public interface TypeRepository extends CrudRepository<Type, Long> {
 }
 
 
-public interface TypeRepository extends CrudRepository<Type, Long> {
-	Type findByType(String type);
-	Optional<Type> findById(long id);
