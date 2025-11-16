@@ -12,6 +12,7 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="#">Réservations</a>
         </div>
+
         <div class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
                 <li th:classappend="${module == 'home' ? 'active' : ''}">
@@ -22,17 +23,26 @@
                 </li>
             </ul>
 
-            <!-- Section connexion/déconnexion et messages flash -->
-            <div style="float:right">
-                <!-- Liens selon l'authentification -->
-                <p sec:authorize="!isAuthenticated()">
-                    Vous n'êtes pas connecté.<br>
+            <!-- Zone droite : login / logout -->
+            <div style="float:right;">
+
+                <!-- Si NON connecté -->
+                <div sec:authorize="!isAuthenticated()">
+                    <p>Vous n'êtes pas connecté.</p>
                     <a th:href="@{/login}" class="nav-link">Se connecter</a>
-                </p>
-                <p sec:authorize="isAuthenticated()">
-                    Connecté en tant que <span sec:authentication="name"></span><br>
-                    <a th:href="@{/logout}" class="nav-link">Se déconnecter</a>
-                </p>
+                </div>
+
+                <!-- Si connecté -->
+                <div sec:authorize="isAuthenticated()">
+                    <p>
+                        Bonjour <span sec:authentication="principal.username"></span> !
+                    </p>
+
+                    <!-- Obligatoire : logout via POST -->
+                    <form th:action="@{/logout}" method="post" class="nav-link">
+                        <button class="unset">Se déconnecter</button>
+                    </form>
+                </div>
 
                 <!-- Messages flash -->
                 <div th:if="${param.loginError}" class="alert alert-danger" role="alert">
@@ -44,10 +54,10 @@
                 <div th:if="${param.loginRequired}" class="alert alert-warning" role="alert">
                     Veuillez vous connecter pour accéder à cette page.
                 </div>
+
             </div>
         </div>
     </div>
 </header>
 </body>
 </html>
-
