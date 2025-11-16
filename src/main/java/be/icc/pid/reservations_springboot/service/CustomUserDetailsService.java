@@ -1,4 +1,4 @@
-package be.icc.pid.reservations_springboot.config;
+package be.icc.pid.reservations_springboot.service;
 
 
     
